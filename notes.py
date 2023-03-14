@@ -13,9 +13,7 @@ def file_exist(data):
         print ("Запрашиваемый файл не был найден")  
         file_exist = 0
         
-        
-    return file_exist
-# file_exist(datas)       
+    return file_exist     
         
 def read_data(data):
     file_e = file_exist(data)
@@ -25,11 +23,8 @@ def read_data(data):
             adds = json.load(openfile)
             for line, body in adds.items():
                 print(line,":")
-                print(body,"\n")
-                
-    return adds
-          
-read_data(datas)   
+                print(body,"\n")           
+    return adds  
  
 def add_new_note(data):
     adds ={}
@@ -65,8 +60,6 @@ def add_new_note(data):
             
             json.dump(adds, f, ensure_ascii=False, indent=4, default = str)
             f.write('\n')
-   
-
 
 def search_data(data):
     if file_exist(data) == 1:
@@ -84,13 +77,11 @@ def search_data(data):
                     len+=1
                     
             if len == 0: 
-                print("Такой заметки нет, попробуйте снова")
-                
+                print("Такой заметки нет, попробуйте снова")           
     else:
         print("Файл c заметками не найден")
     
     return [len, note]
-
 
 def edit_note(data):
     if file_exist(data) == 1:
@@ -98,8 +89,7 @@ def edit_note(data):
         searching = search_data(datas)
         edits = {}
         if searching[0] > 1:
-            print("Выберите конкретную заметку:")
-            
+            print("Выберите конкретную заметку:")   
         else:
             print("Вы выбрали: "+ searching[1])
             key_str = ((str(searching[1].split(": ")[0])).lstrip()).replace('"','')
@@ -118,8 +108,7 @@ def edit_note(data):
             else:
                 print ("Введите новые данные:")  
                 new_data = input()
-                
-                
+            
                 with open(data, 'r', encoding='utf-8') as r:
                     edits = json.load(r)
                     
@@ -131,7 +120,6 @@ def edit_note(data):
                     json.dump(edits, f, ensure_ascii=False, indent=4, default = str)
                 print ("Заметка соханена!")
             
-        
 def menu (data):
     choice = 0
     while choice < 5:
@@ -157,4 +145,5 @@ def menu (data):
             print("Неверный ввод, попробуйте еще раз")
     else:
         print("попробуйте снова")
+        
 menu(datas)
